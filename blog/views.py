@@ -21,11 +21,10 @@ def blog(request):
 
 
 def blog_detail(request ,id):
-    if request.GET.get('search'):
-        serch = Blog.objects.filter(content__contains=request.GET.get('search'))
-    elif request.method == 'GET':
+    # if request.GET.get('search'):
+    #     serch = Blog.objects.filter(content__contains=request.GET.get('search'))
+    if request.method == 'GET':
         blog = Blog.objects.get(id=id)
-       
         reply = Reply.objects.filter(status=True)
 
         context ={
@@ -37,7 +36,7 @@ def blog_detail(request ,id):
         form = CommentForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request,messages.SUCCESS,'yor comment submited and publish as soon')
+            messages.add_message(request,messages.SUCCESS,'نظر شما ارسال و به زودی منتشر می شود')
             return redirect (request.path_info)
 
         else:
