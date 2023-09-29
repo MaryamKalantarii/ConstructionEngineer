@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactUs,Order
+from .models import ContactUs,Order_Work
 
 
 
@@ -8,7 +8,8 @@ class ContactUsForm(forms.ModelForm):
         model = ContactUs
         fields = ['name', 'email','subject', 'message']
 
-class OrderForm(forms.ModelForm):
+class  Order_WorkForm(forms.ModelForm):
     class Meta:
-        model = Order
+        model = Order_Work
         fields = ['name', 'email','phone', 'message']
+        

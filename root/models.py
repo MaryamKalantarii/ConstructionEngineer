@@ -5,14 +5,7 @@ import datetime
 
 # Create your models here.
 
-class Order (models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    messege = models.TextField()
 
-    def __str__(self):
-        return self.name
 
 class Constructions (models.Model):
     image = models.ImageField(upload_to="constructions",default='constructions.jpg')
@@ -57,7 +50,19 @@ class ContactUs (models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=200)
     message = models.TextField()
+    status = models.BooleanField(default=False)
 
+
+    def __str__(self):
+        return self.name
+
+
+
+class Order_Work(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    message = models.TextField()
 
     def __str__(self):
         return self.name

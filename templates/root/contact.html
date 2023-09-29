@@ -17,6 +17,11 @@
 
       </div>
     </div><!-- End Breadcrumbs -->
+    {% if messages %}
+    {% for message in messages %}
+      <p style='color:green;  font-size:25px; margin-left:500px;'>{{message}}</p>
+    {% endfor %}
+    {% endif %}
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">

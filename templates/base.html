@@ -37,7 +37,20 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+ <style>
+    li img{
+      border-radius:60%;
+       width:50px;
+       
+      
+    }
+   
+   
+  </style>  
+
+
 </head>
+
 
 <body>
 
@@ -48,19 +61,21 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> -->
-        <h1>UpConstruction<span>.</span></h1>
+        <h1><span>.</span></h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{% url 'root:home' %}" class="active">Home</a></li>
-          <li><a href="{% url 'root:about' %}">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          
+          <li><a href="{% url 'root:home' %}" class="active">خانه</a></li>
+          <li><a href="{% url 'root:about' %}">درباره ما</a></li>
+          <li><a href="{% url 'services:services' %}">خدمات</a></li>
+          <li><a href="{% url 'projects:projects' %}">پروژه</a></li>
+          <li><a href="{% url 'blog:blog' %}">وبلاگ</a></li>
+         
+          <li class="dropdown"><a href="#"><span>منو</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -77,13 +92,14 @@
               <li><a href="#">Dropdown 4</a></li>
             </ul>
           </li>
-          <li><a href="{% url 'root:contact' %}">Contact</a></li>
+          <li><a href="{% url 'root:contact' %}">ارتباط با ما</a></li>
 
           {% if request.user.is_authenticated %}
-          <li class="loged">loged as {{request.user.username}}</li>
+          <li class="loged" style="color:white;font-size:20px;">loged as {{request.user.username}}</li>
           <li><img src={{request.user.image.url}}></li>
-          <li><a href={% url 'accounts:logout' %}>Logout</a></li>
-          <li><a href={% url 'password_change' %}>change password</a></li>
+          <li><a href={% url 'accounts:logout' %}>خروج</a></li>
+          <li><a href={% url 'password_change' %}>تغییر رمز</a></li>
+          <li><a href={% url 'accounts:edit_profile' %}>ادیت پروفایل</a></li>
           {% else %}
           <li><a href={% url 'accounts:login' %}>Login</a></li>
           <li><a href={% url 'accounts:signup' %}>signup</a></li>
