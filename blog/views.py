@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404,redirect
 from .models import Blog,Comment,Reply
 from .forms import CommentForm, ReplyForm
 from django.contrib import messages
@@ -21,27 +21,30 @@ def blog(request):
 
 
 def blog_detail(request ,id):
-    # if request.GET.get('search'):
-    #     serch = Blog.objects.filter(content__contains=request.GET.get('search'))
     if request.method == 'GET':
-        blog = Blog.objects.get(id=id)
-        reply = Reply.objects.filter(status=True)
+        try:
+            comments = Comment.objects.filter(which_blog=id, status=True)
+            blog = Blog.objects.get(id=id)
+            reply = Reply.objects.filter(status=True)
 
-        context ={
+            context ={
+                'comments': comments,
                 "blog": blog,
                 'reply' : reply,
-            }
-        return render(request,'blog/blog-details.html',context=context)
+                }
+            return render(request,'blog/blog-details.html',context=context)
+        except:
+                return render(request,'blog/404.html')
     elif request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request,messages.SUCCESS,'نظر شما ارسال و به زودی منتشر می شود')
-            return redirect (request.path_info)
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.add_message(request,messages.SUCCESS,'نظر شما ارسال و به زودی منتشر می شود')
+                return redirect (request.path_info)
 
-        else:
-            messages.add_message(request,messages.ERROR,'yor comment data is not valid')
-            return redirect (request.path_info)
+            else:
+                messages.add_message(request,messages.ERROR,'yor comment data is not valid')
+                return redirect (request.path_info)
 
 
 
@@ -66,3 +69,7 @@ def reply(request, id):
         else:
             messages.add_message(request,messages.ERROR,'chete baba ba in data dadanet .... zereshk')
             return redirect (request.path_info)
+
+
+ # if request.GET.get('search'):
+        #     serch = Blog.objects.filter(content__contains=request.GET.get('search'))
