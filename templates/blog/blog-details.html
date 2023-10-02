@@ -38,7 +38,6 @@
                 <ul>
                   <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{blog.writer}}</a></li>
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{blog.schedule}}</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
                 </ul>
               </div><!-- End meta top -->
 
@@ -73,11 +72,18 @@
                 <div class="d-flex">
                   <div class="comment-img"><img src="{% static 'assets/img/blog/comments-1.jpg' %}" alt=""></div>
                   <div>
-                    <h5><a href="">{{comment.name}}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                    <h5><a href="">{{comment.name}}</a> 
+                      <a href={% url 'blog:reply' id=comment.id %} class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                      
                     <time datetime="2020-01-01">{{comment.created_date|date:"d M Y"}}</time>
                     <p>
                       {{comment.message}}
                     </p>
+                    {% for rp in reply %}
+                      {% if rp.which_comment.id == comment.id %}
+                          <p>{{rp.name}}:{{rp.message}}</p>
+                      {% endif %}
+                    {% endfor %}
                   </div>
                 </div>
               </div><!-- End comment #1 -->
@@ -122,24 +128,7 @@
 
           </div>
 
-          <div class="col-lg-4">
-
-            <div class="sidebar">
-
-              <div class="sidebar-item search-form">
-                <h3 class="sidebar-title">Search</h3>
-                <form action={% url 'blog:serch_search'%} class="mt-3">
-                  <input type="text">
-                  <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-              </div><!-- End sidebar search formn-->
-
-            
-              
-            </div><!-- End Blog Sidebar -->
-
-          </div>
-        </div>
+          
 
       </div>
     </section><!-- End Blog Details Section -->

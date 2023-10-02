@@ -3,15 +3,31 @@ from .models import Blog,Comment,Reply
 from .forms import CommentForm, ReplyForm
 from django.contrib import messages
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from projects.models import Category
 
 # Create your views here.
 def blog(request):
-    blog= Blog.objects.filter(status=True)
-
-        
+    if request.method =="GET":
+        category = Category.objects.all()
+        blog= Blog.objects.filter(status=True)
+    elif request.GET.get('search'):
+        blog = Blog.objects.filter(content__contains=request.GET.get('search'))
+    blog = Paginator(blog,3)
+    first_page = 1
+    last_page = blog.num_pages
+    try:
+        page_number = request.GET.get('page')
+        blog = blog.get_page(page_number)
+    except EmptyPage:
+        blog = blog.get_page(1)
+    except PageNotAnInteger:
+            blog = blog.get_page(1)
     context={
-            'blog': blog,
-        }
+            'blog':blog,
+            'first_page': first_page,
+            'last_page': last_page,
+            'category': category,
+            }
     return render(request,'blog/blog.html',context=context)
 
 
@@ -26,11 +42,13 @@ def blog_detail(request ,id):
             comments = Comment.objects.filter(which_blog=id, status=True)
             blog = Blog.objects.get(id=id)
             reply = Reply.objects.filter(status=True)
+            category = Category.objects.all()
 
             context ={
                 'comments': comments,
                 "blog": blog,
                 'reply' : reply,
+                'category': category,
                 }
             return render(request,'blog/blog-details.html',context=context)
         except:
@@ -64,12 +82,9 @@ def reply(request, id):
         form = ReplyForm(request.POST)
         if form.is_valid():
             form.save()
-            cid = comment.which_course.id
+            cid = comment.which_blog.id
             return redirect (f'/blog/blog-detail/{cid}')
         else:
             messages.add_message(request,messages.ERROR,'chete baba ba in data dadanet .... zereshk')
             return redirect (request.path_info)
 
-
- # if request.GET.get('search'):
-        #     serch = Blog.objects.filter(content__contains=request.GET.get('search'))
