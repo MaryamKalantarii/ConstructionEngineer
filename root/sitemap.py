@@ -34,9 +34,6 @@ class DynamicSiteMap(Sitemap):
     
     def location(self,obj):
         return '/blog/blog_detail/%s' % obj.id
-        # return '/projects/project_detail/%s' % obj.id
-        # return '/services/service_detail/%s' % obj.id
-    def location(self,obj):
-         return '/projects/project_detail/%s' % obj.id
-    def location(self,obj):
-        return '/services/service_detail/%s' % obj.id
+        return '/projects/project_detail/%s' % obj.id
+        return '/services/service_detail/%s' % obj.id  
+  

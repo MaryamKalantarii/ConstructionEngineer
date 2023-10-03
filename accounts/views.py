@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import CustomeUser
+from .forms import CaptchaForm
 
 
 
@@ -14,7 +15,8 @@ def Login(request):
         return redirect('/')
     elif request.method == 'GET':
         form = AuthenticationForm()
-        return render(request,'registration/login.html', context={'form': form})
+        captcha = CaptchaForm()
+        return render(request,'registration/login.html', context={'form': form , 'captcha': captcha})
     elif request.method == 'POST':
         if '@' in request.POST.get('username'):
             try:

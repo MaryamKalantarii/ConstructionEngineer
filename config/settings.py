@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'services',
     'projects',
     'blog',
+    'robots',
+    'captcha',
 ]
 
 
