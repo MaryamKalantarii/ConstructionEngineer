@@ -19,14 +19,14 @@
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Blog Section ======= -->
-    <div class="sidebar-item search-form" style="margin-left:50px; text-align:center;">
+    {% comment %} <div class="sidebar-item search-form" style="margin-left:50px; text-align:center;">
       <h4 class="sidebar-title">Search</h4>
       <form action={% url 'blog:blog_search' %} class="mt-3">
         <input type="text" name="search">
         <button type="submit"><i class="bi bi-search"></i></button>
       </form>
     </div><!-- End sidebar search formn--> 
-   
+    {% endcomment %}
     <div class="col-lg-4">
 
       <div class="sidebar">
@@ -83,36 +83,22 @@
           {% endfor %}
         </div><!-- End blog posts list -->
 
-         <div class="blog-pagination">
-          {% if blog.has_next and blog.has_previous %}
-          <ul class="justify-content-center">
-            <li><a href="">{{blog.number}}</a></li>
-            <li class="active"><a href="#">{{blog.next_page_number}}</a></li>
-            <li><a href="?page={{blog.previous_page_number}}">3</a></li>
-          </ul>
-          {% endif %} 
-        </div><!-- End blog pagination --> 
 
-        {% comment %} {% if blog.has_next and blog.has_previous %}
-        <a href="?page={{first_page}}"><<</a>
-        <a href="#">{{blog.previous_page_number}}</a>
-        <a href="?page={{blog.previous_page_number}}"><  </a>
-        <a href="#" class="dimmed">{{blog.number}}</a>
-        <a href="?page={{blog.next_page_number}}">></a>
-        <a href="#">{{blog.next_page_number}}</a>
-        <a href="?page={{last_page}}">>></a>
-        {% elif blog.has_next %}
-        <a href="?page={{blog.next_page_number}}">></a>
-        <a href="#">{{blog.next_page_number}}</a>
-        <a href="?page={{last_page}}">>></a>
-        {% elif blog.has_previous %}
-        <a href="?page={{first_page}}"><<</a>
-        <a href="#">{{blog.previous_page_number}}</a>
-        <a href="?page={{blog.previous_page_number}}"><  </a>
-        {% endif %} {% endcomment %}
+{% comment %}         
+      <div class="blog-pagination">
+          <ul class="justify-content-center">
+            <li><a href="?page={{courses.next_page_number}}">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="">3</a></li>
+          </ul>
+         
+        </div><!-- End blog pagination --> 
+        {% endcomment %}
 
       </div>
     </section><!-- End Blog Section -->
+
+    
 
   </main><!-- End #main -->
 {% endblock 'content' %}

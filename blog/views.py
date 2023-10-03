@@ -12,7 +12,7 @@ def blog(request):
         blog= Blog.objects.filter(status=True)
     elif request.GET.get('search'):
         blog = Blog.objects.filter(content__contains=request.GET.get('search'))
-    blog = Paginator(blog,3)
+    blog = Paginator(blog,2)
     first_page = 1
     last_page = blog.num_pages
     try:
