@@ -8,7 +8,7 @@ from captcha.fields import CaptchaField
 class CustomUserCreation(UserCreationForm):
     class Meta:
         model = CustomeUser
-        fields = ['email', 'password1', 'password2']
+        fields = ['id_code', 'password1', 'password2']
 
 
 
