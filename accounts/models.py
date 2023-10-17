@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser,BaseUserManager,PermissionsMixin
 
 
-
 # class CustomeUser(AbstractUser):
 #     id_code = models.CharField(max_length=10,null=True, blank=True)
 #     mobile = models.CharField(max_length=20,null=True, blank=True)
@@ -15,7 +14,6 @@ class CustomeBaseUserManager(BaseUserManager):
         # email = self.normalize_email(email)
         if len(id_code) != 10 or id_code.isnumeric==False:
             raise ValueError('The given id_code must be set')
-
         user = self.model(id_code=id_code, **extra_fields)
         user.set_password(password)
         user.save()
@@ -36,7 +34,7 @@ class CustomeBaseUserManager(BaseUserManager):
 class CustomeUser(AbstractBaseUser, PermissionsMixin):
     id_code = models.CharField(max_length=10,null=True, blank=True)
     # email = models.EmailField(unique=True)
-    username  = models.CharField(max_length=100, unique=True)
+    # username  = models.CharField(max_length=100, unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
