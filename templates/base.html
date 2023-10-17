@@ -89,7 +89,6 @@
           <li><img src={{request.user.image.url}}></li>
           <li><a href={% url 'accounts:logout' %}>خروج</a></li>
           <li><a href={% url 'password_change' %}>تغییر رمز</a></li>
-          <li><a href={% url 'accounts:edit_profile' %}>ادیت پروفایل</a></li>
           {% else %}
           <li><a href={% url 'accounts:login' %}>Login</a></li>
           <li><a href={% url 'accounts:signup' %}>signup</a></li>

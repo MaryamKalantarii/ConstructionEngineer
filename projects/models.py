@@ -16,7 +16,7 @@ class Project(models.Model):
     category = models.ManyToManyField(Category)
     title = models.CharField(max_length=100)
     content = models.TextField()
-    schedule = models.DateTimeField(default=datetime.datetime.now())
+    schedule = models.DateTimeField(default=datetime.datetime.now)
     status = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
